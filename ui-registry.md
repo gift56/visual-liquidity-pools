@@ -132,3 +132,24 @@ File: `src/components/ui/GlassCard.tsx`
 - All buttons have explicit `type="button"` unless submitting a form.
 - Form labels use `htmlFor` paired with input `id`.
 - ARIA attributes only on supported elements.
+
+---
+
+## Chest Battle Dashboard
+
+Files: `src/components/dashboard/`
+Last updated: 2026-10-25
+
+| Property         | Class / token                                                        |
+| ---------------- | -------------------------------------------------------------------- |
+| Background       | `bg-bg-primary` full-viewport canvas; panels use `bg-dashboard-*` tokens |
+| Border           | `border-white/[0.06]` on panel divisions; `border-accent-gold` for winning wedge |
+| Border radius    | `rounded-lg` for controls/cards; round segmented wheel                    |
+| Text — primary   | `text-white`                                                         |
+| Text — secondary | `text-text-secondary`; `text-text-muted` for helper labels           |
+| Spacing          | Compact HUD spacing: `gap-1.5`–`gap-3`, `px-2`–`px-5`                   |
+| Hover state      | `hover:bg-white/[0.05]`, `hover:text-white`; violet-to-cyan CTA       |
+| Shadow           | `shadow-center-panel`, `shadow-glow`, gold winning glow                  |
+| Accent usage     | Violet selection/CTA, gold rewards/winner, cyan status, green live indicator |
+
+**Pattern notes:** The dashboard fills the viewport with `bg-bg-primary`; do not add an outer gradient backdrop, gutters, rounded shell, or page-level desktop scrolling. The treasure room is a vertically scrollable region that contains the prize stage, item cards, and reviewable live feed. Its eight illustrated wheel segments spin only after an explicit click; the gold winner treatment and center result identify the same prize. Each spin starts a 24:18 countdown before another spin is available. Honor reduced-motion preferences. Prefer bundled collectible illustrations, charcoal surfaces, readable uppercase section labels, and visible focus rings. “Buy a Chest” is presentational only; do not imply a real purchase or claim.

@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Visual Liquidity Pools — Design System",
-  description: "Dark gamified HUD design system for Visual Liquidity Pools",
+  title: "Visual Liquidity Pools — Chest Battle",
+  description: "Explore the royal chest battle dashboard.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

@@ -15,6 +15,14 @@
   --color-accent-green: #22c55e;
   --color-accent-gold: #f59e0b;
   --color-accent-pink: #ec4899;
+  --color-dashboard-header: #11131b;
+  --color-dashboard-sidebar: #141620;
+  --color-dashboard-center: #191b25;
+  --color-dashboard-chat: #151720;
+  --color-dashboard-card: #20232e;
+  --color-dashboard-inner: #181b25;
+  --color-dashboard-vip-start: #37327f;
+  --color-dashboard-vip-end: #292b63;
 
   /* Text */
   --color-text-primary: #e2e8f0;
@@ -64,6 +72,10 @@
   --shadow-glow-green: 0 0 24px rgba(34, 197, 94, 0.3);
   --shadow-glow-gold: 0 0 24px rgba(245, 158, 11, 0.3);
   --shadow-glow-pink: 0 0 24px rgba(236, 72, 153, 0.3);
+  --shadow-roulette: 0 0 38px rgba(79, 70, 229, 0.12);
+  --shadow-prize-wheel: 0 0 42px rgba(79, 70, 229, 0.2);
+  --shadow-prize-highlight: 0 0 32px rgba(245, 158, 11, 0.75);
+  --shadow-center-panel: 0 12px 50px rgba(0, 0, 0, 0.38);
 }
 
 body {
@@ -74,6 +86,152 @@ body {
 
 html {
   scroll-behavior: smooth;
+}
+
+@media (min-width: 768px) {
+  html:has(.dashboard-page),
+  body:has(.dashboard-page) {
+    height: 100%;
+    overflow: hidden;
+    overscroll-behavior: none;
+  }
+}
+
+.prize-wheel {
+  background: conic-gradient(
+    from -22.5deg,
+    color-mix(
+        in srgb,
+        var(--color-accent-violet) 25%,
+        var(--color-dashboard-inner)
+      )
+      0deg 44deg,
+    var(--color-border) 44deg 45deg,
+    color-mix(
+        in srgb,
+        var(--color-accent-cyan) 15%,
+        var(--color-dashboard-inner)
+      )
+      45deg 89deg,
+    var(--color-border) 89deg 90deg,
+    color-mix(
+        in srgb,
+        var(--color-accent-pink) 15%,
+        var(--color-dashboard-inner)
+      )
+      90deg 134deg,
+    var(--color-border) 134deg 135deg,
+    color-mix(
+        in srgb,
+        var(--color-accent-gold) 16%,
+        var(--color-dashboard-inner)
+      )
+      135deg 179deg,
+    var(--color-border) 179deg 180deg,
+    color-mix(
+        in srgb,
+        var(--color-accent-green) 16%,
+        var(--color-dashboard-inner)
+      )
+      180deg 224deg,
+    var(--color-border) 224deg 225deg,
+    color-mix(
+        in srgb,
+        var(--color-accent-violet) 21%,
+        var(--color-dashboard-inner)
+      )
+      225deg 269deg,
+    var(--color-border) 269deg 270deg,
+    color-mix(
+        in srgb,
+        var(--color-accent-cyan) 13%,
+        var(--color-dashboard-inner)
+      )
+      270deg 314deg,
+    var(--color-border) 314deg 315deg,
+    color-mix(
+        in srgb,
+        var(--color-accent-pink) 12%,
+        var(--color-dashboard-inner)
+      )
+      315deg 359deg,
+    var(--color-border) 359deg 360deg
+  );
+  transition: transform 4.8s cubic-bezier(0.12, 0.72, 0.12, 1);
+  will-change: transform;
+}
+
+.prize-wheel__item {
+  position: absolute;
+  inset: 0;
+  transform: rotate(var(--prize-angle));
+}
+
+.prize-wheel__art {
+  position: absolute;
+  top: 5%;
+  left: 50%;
+  display: flex;
+  width: 22%;
+  transform: translateX(-50%);
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+}
+
+.prize-wheel__image {
+  width: clamp(4rem, 11vh, 7rem);
+  height: clamp(4rem, 11vh, 7rem);
+}
+
+.prize-wheel__label {
+  max-width: 5.5rem;
+  border-radius: 9999px;
+  background: rgb(13 14 18 / 65%);
+  padding: 0.1rem 0.35rem;
+  color: var(--color-text-primary);
+  font-size: clamp(0.55rem, 0.75vw, 0.7rem);
+  font-weight: 600;
+  line-height: 1.2;
+  text-align: center;
+  white-space: nowrap;
+  transform: rotate(
+    calc(var(--label-angle) - var(--prize-angle) - var(--wheel-angle))
+  );
+  transition: transform 4.8s cubic-bezier(0.12, 0.72, 0.12, 1);
+}
+
+.prize-wheel-shell {
+  position: relative;
+  overflow: hidden;
+  width: min(100%, 74vh, 680px);
+  flex: none;
+  aspect-ratio: 1;
+}
+
+.prize-wheel-shell::after {
+  position: absolute;
+  z-index: 30;
+  top: 0;
+  left: 50%;
+  width: 0;
+  height: 0;
+  transform: translateX(-50%);
+  border-right: 0.65rem solid transparent;
+  border-left: 0.65rem solid transparent;
+  border-top: 1.2rem solid var(--color-accent-gold);
+  content: "";
+  filter: drop-shadow(0 0 0.4rem rgb(245 158 11 / 55%));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .prize-wheel {
+    transition: none;
+  }
+
+  .prize-wheel__label {
+    transition: none;
+  }
 }
 
 .text-display {
